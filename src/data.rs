@@ -5,13 +5,13 @@ use anyhow;
 use serde::{ Serialize, Deserialize };
 use serde_json;
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Tables {
     pub tables: Vec<Table>,
     pub updated_at: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Table {
     pub name: String,
     pub pos: TablePos,
@@ -20,7 +20,7 @@ pub struct Table {
     pub updated_at: String,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct TablePos {
     x: f32,
     y: f32,
@@ -28,7 +28,7 @@ pub struct TablePos {
     height: f32,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum TableStat {
     Occupied,   // 出席
     Vacant,     // 空席

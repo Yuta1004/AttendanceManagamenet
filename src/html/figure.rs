@@ -17,8 +17,9 @@ impl HTMLFigureFormatter for Tables {
     style=\"
         border: solid;
         position: relative;
-        width: 80vw;
-        height: 80vh;
+        width: 90vw;
+        height: 90vh;
+        margin: auto;
     \">
     {}
 </div>
@@ -45,10 +46,10 @@ impl HTMLFigureFormatter for Table {
 <button
     style=\"
         position: absolute;
-        left: calc(80vw * {});
-        top: calc(80vh * {});
-        width: calc(80vw * {});
-        height: calc(80vh * {});
+        left: calc(90vw * {});
+        top: calc(90vh * {});
+        width: calc(90vw * {});
+        height: calc(90vh * {});
     \"
 >
     <div>

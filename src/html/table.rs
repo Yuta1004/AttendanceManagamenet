@@ -26,8 +26,7 @@ impl HTMLTableFormatter for Tables {
     </tr>
     {}
 </table>
-<p>最終更新日時: {}</p>
-        ", formatted_tables, self.updated_at)
+        ", formatted_tables)
     }
 }
 

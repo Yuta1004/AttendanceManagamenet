@@ -22,10 +22,10 @@ pub struct Table {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct TablePos {
-    x: f32,
-    y: f32,
-    width: f32,
-    height: f32,
+    pub x: f32,
+    pub y: f32,
+    pub width: f32,
+    pub height: f32,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

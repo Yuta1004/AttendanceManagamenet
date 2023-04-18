@@ -1,6 +1,7 @@
+SRCS := $(shell find src/*.rs)
 DIST_BIN := cgi-bin/attendance_management
 
-$(DIST_BIN):
+$(DIST_BIN): $(SRCS)
 	mkdir -p cgi-bin
 	cargo build
 	cp target/debug/attendance_management $(DIST_BIN)

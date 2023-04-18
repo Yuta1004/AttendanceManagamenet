@@ -7,17 +7,17 @@ use serde_json;
 
 #[derive(Serialize, Deserialize)]
 pub struct Tables {
-    tables: Vec<Table>,
-    updated_at: String,
+    pub tables: Vec<Table>,
+    pub updated_at: String,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct Table {
-    name: String,
-    pos: TablePos,
-    state: TableStat,
-    comment: String,
-    updated_at: String,
+    pub name: String,
+    pub pos: TablePos,
+    pub state: TableStat,
+    pub comment: String,
+    pub updated_at: String,
 }
 
 #[derive(Serialize, Deserialize)]

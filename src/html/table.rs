@@ -46,8 +46,8 @@ impl HTMLTableFormatter for Table {
 impl HTMLTableFormatter for TableStat {
     fn format(&self) -> String {
         match self {
-            TableStat::Occupied => "在席".to_string(),
-            TableStat::Vacant => "空席".to_string(),
+            TableStat::Occupied => "〇".to_string(),
+            TableStat::Vacant => "".to_string(),
         }
     }
 }

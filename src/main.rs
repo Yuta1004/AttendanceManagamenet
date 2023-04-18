@@ -1,8 +1,8 @@
 use anyhow;
 use cgi;
-use serde_json;
 
 mod data;
+mod html;
 
 const JSON_FILE: &'static str = "cgi-bin/data.json";
 
@@ -13,5 +13,5 @@ fn cgi_main(_: cgi::Request) -> anyhow::Result<cgi::Response> {
     let tables = data::load(JSON_FILE)?;
 
     // 2. レスポンス生成
-    Ok(cgi::text_response(200, serde_json::to_string(&tables)?))
+    Ok(cgi::html_response(200, html::format(&tables)))
 }

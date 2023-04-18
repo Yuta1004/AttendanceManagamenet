@@ -1,4 +1,4 @@
-SRCS := $(shell find src/*.rs)
+SRCS := $(shell find src/*.rs src/**/*.rs)
 DIST_BIN := cgi-bin/attendance_management
 
 $(DIST_BIN): $(SRCS)

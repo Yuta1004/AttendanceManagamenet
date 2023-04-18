@@ -1,7 +1,7 @@
 use crate::data::{ Tables };
 
 mod figure;
-mod list;
+mod table;
 
 pub fn format(tables: &Tables) -> String {
     format!("
@@ -17,19 +17,19 @@ pub fn format(tables: &Tables) -> String {
     {}
 </body>
 </html>
-    ", gen_figure(tables), gen_list(tables))
-}
-
-fn gen_list<T>(elem: &T) -> String
-where
-    T: list::HTMLListFormatter
-{
-    elem.format()
+    ", gen_figure(tables), gen_table(tables))
 }
 
 fn gen_figure<T>(elem: &T) -> String
 where
     T: figure::HTMLFigureFormatter
+{
+    elem.format()
+}
+
+fn gen_table<T>(elem: &T) -> String
+where
+    T: table::HTMLTableFormatter
 {
     elem.format()
 }

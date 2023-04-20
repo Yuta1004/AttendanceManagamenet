@@ -1,9 +1,7 @@
 use std::fs::File;
 use std::io::{BufReader, BufWriter};
 
-use anyhow;
 use serde::{Deserialize, Serialize};
-use serde_json;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Tables {

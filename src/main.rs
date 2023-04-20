@@ -2,15 +2,13 @@ mod data;
 mod html;
 mod request;
 
-use anyhow;
-use cgi;
 use chrono::Local;
 
 use data::Tables;
 use html::{HTMLRenderer, TopElem};
 use request::Request;
 
-const JSON_FILE: &'static str = "cgi-bin/data.json";
+const JSON_FILE: &str = "cgi-bin/data.json";
 
 cgi::cgi_try_main! { cgi_main }
 

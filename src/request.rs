@@ -19,8 +19,8 @@ pub fn parse(request: cgi::Request) -> anyhow::Result<Request> {
         Err(_) => Err(RequestError::UTF8DecodingError),
     }?;
 
-    let form_elements = req_body.split(";");
-    for elem in form_elements.map(|item| item.split("=").collect::<Vec<&str>>()) {
+    let form_elements = req_body.split(';');
+    for elem in form_elements.map(|item| item.split('=').collect::<Vec<&str>>()) {
         match elem[0] {
             "state" => return Ok(Request::UpdateState(elem[1].to_string())),
             _ => {}

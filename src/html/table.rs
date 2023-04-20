@@ -8,7 +8,7 @@ impl HTMLRenderer<TableElem> for Tables {
         let rendered_tables = self
             .tables
             .iter()
-            .map(|table| <Table as HTMLRenderer<TableElem>>::render(table))
+            .map(<Table as HTMLRenderer<TableElem>>::render)
             .collect::<Vec<String>>()
             .join("\n");
 

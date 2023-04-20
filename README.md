@@ -8,7 +8,7 @@
 $ make run
 ```
 
-`localhost:8000/cgi-bin/attendance_management' でアクセスできます
+`localhost:8000/cgi-bin/attendance_management` でアクセスできます
 
 ### 配布用ビルド
 

@@ -4,6 +4,7 @@ mod request;
 
 use anyhow;
 use cgi;
+use chrono::Local;
 
 use request::Request;
 
@@ -18,10 +19,17 @@ fn cgi_main(request: cgi::Request) -> anyhow::Result<cgi::Response> {
     // 2. リクエスト処理
     match request::parse(request)? {
         Request::View => {},
-        Request::UpdateState(name) => tables.tables
-            .iter_mut()
-            .filter(|table| table.name == name)
-            .for_each(|table| table.state = table.state.inverse()),
+        Request::UpdateState(name) => {
+            let now = Local::now().format("%Y-%m-%d %H:%M:%S");
+            tables.tables
+                .iter_mut()
+                .filter(|table| table.name == name)
+                .for_each(|table| {
+                    table.state = table.state.inverse();
+                    table.updated_at = now.to_string();
+                });
+            tables.updated_at = now.to_string();
+        }
     };
 
     // 3. data.json 書き込み

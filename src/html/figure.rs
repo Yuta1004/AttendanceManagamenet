@@ -17,10 +17,9 @@ impl HTMLFigureRenderer for Tables {
     <form
         method=\"POST\"
         style=\"
-            border: solid;
             position: relative;
-            width: 90vw;
-            height: 90vh;
+            width: 100vw;
+            height: 100vh;
             margin: auto;
         \">
         {}
@@ -59,10 +58,10 @@ impl HTMLFigureRenderer for Table {
     value=\"{}\"
     style=\"
         position: absolute;
-        left: calc(90vw * {});
-        top: calc(90vh * {});
-        width: calc(90vw * {});
-        height: calc(90vh * {});
+        left: calc(100vw * {});
+        top: calc(100vh * {});
+        width: calc(100vw * {});
+        height: calc(100vh * {});
         background-color: {};
     \"
 >

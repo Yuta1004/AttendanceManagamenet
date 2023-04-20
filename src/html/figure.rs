@@ -1,17 +1,19 @@
+use crate::data::{Table, TableStat, Tables};
 use crate::html::HTMLRenderer;
-use crate::data::{ Tables, Table, TableStat };
 
 pub(super) struct FigureElem;
 
 impl HTMLRenderer<FigureElem> for Tables {
     fn render(&self) -> String {
-        let rendered_tables = self.tables
+        let rendered_tables = self
+            .tables
             .iter()
             .map(|table| <Table as HTMLRenderer<FigureElem>>::render(table))
             .collect::<Vec<String>>()
             .join("\n");
 
-        format!("
+        format!(
+            "
 <div
     style=\"
         position: relative;
@@ -29,7 +31,9 @@ impl HTMLRenderer<FigureElem> for Tables {
         最終更新 : {}
     </p>
 </div>
-        ", rendered_tables, self.updated_at)
+        ",
+            rendered_tables, self.updated_at
+        )
     }
 }
 
@@ -37,10 +41,11 @@ impl HTMLRenderer<FigureElem> for Table {
     fn render(&self) -> String {
         let button_color = match self.state {
             TableStat::Occupied => "lime",
-            TableStat::Vacant => "pink"
+            TableStat::Vacant => "pink",
         };
 
-        format!("
+        format!(
+            "
 <button
     type=\"submit\"
     name=\"state\"
@@ -59,7 +64,15 @@ impl HTMLRenderer<FigureElem> for Table {
         <p>{}</p>
     </div>
 </button>
-        ", self.name, self.pos.x, self.pos.y, self.pos.width, self.pos.height,
-           button_color, self.name, self.updated_at)
+        ",
+            self.name,
+            self.pos.x,
+            self.pos.y,
+            self.pos.width,
+            self.pos.height,
+            button_color,
+            self.name,
+            self.updated_at
+        )
     }
 }

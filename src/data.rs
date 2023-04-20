@@ -1,8 +1,8 @@
 use std::fs::File;
-use std::io::{ BufReader, BufWriter };
+use std::io::{BufReader, BufWriter};
 
 use anyhow;
-use serde::{ Serialize, Deserialize };
+use serde::{Deserialize, Serialize};
 use serde_json;
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -30,8 +30,8 @@ pub struct TablePos {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum TableStat {
-    Occupied,   // 在席
-    Vacant,     // 空席
+    Occupied, // 在席
+    Vacant,   // 空席
 }
 
 impl TableStat {

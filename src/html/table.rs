@@ -1,17 +1,19 @@
+use crate::data::{Table, TableStat, Tables};
 use crate::html::HTMLRenderer;
-use crate::data::{ Tables, Table, TableStat };
 
 pub(super) struct TableElem;
 
 impl HTMLRenderer<TableElem> for Tables {
     fn render(&self) -> String {
-        let rendered_tables = self.tables
+        let rendered_tables = self
+            .tables
             .iter()
             .map(|table| <Table as HTMLRenderer<TableElem>>::render(table))
             .collect::<Vec<String>>()
             .join("\n");
 
-        format!("
+        format!(
+            "
 <table
     style=\"
         margin: auto;
@@ -25,20 +27,28 @@ impl HTMLRenderer<TableElem> for Tables {
     </tr>
     {}
 </table>
-        ", rendered_tables)
+        ",
+            rendered_tables
+        )
     }
 }
 
 impl HTMLRenderer<TableElem> for Table {
     fn render(&self) -> String {
-        format!("
+        format!(
+            "
 <tr>
     <td>{}</td>
     <td>{}</td>
     <td>{}</td>
     <td>{}</td>
 </tr>
-        ", self.name, self.state.render(), self.comment, self.updated_at)
+        ",
+            self.name,
+            self.state.render(),
+            self.comment,
+            self.updated_at
+        )
     }
 }
 

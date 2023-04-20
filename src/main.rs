@@ -7,7 +7,7 @@ use cgi;
 use chrono::Local;
 
 use data::Tables;
-use html::{ HTMLRenderer, TopElem };
+use html::{HTMLRenderer, TopElem};
 use request::Request;
 
 const JSON_FILE: &'static str = "cgi-bin/data.json";
@@ -20,10 +20,11 @@ fn cgi_main(request: cgi::Request) -> anyhow::Result<cgi::Response> {
 
     // 2. リクエスト処理
     match request::parse(request)? {
-        Request::View => {},
+        Request::View => {}
         Request::UpdateState(name) => {
             let now = Local::now().format("%Y-%m-%d %H:%M:%S");
-            tables.tables
+            tables
+                .tables
                 .iter_mut()
                 .filter(|table| table.name == name)
                 .for_each(|table| {
@@ -40,6 +41,6 @@ fn cgi_main(request: cgi::Request) -> anyhow::Result<cgi::Response> {
     // 4. レスポンス生成
     Ok(cgi::html_response(
         200,
-        <Tables as HTMLRenderer<TopElem>>::render(&tables)
+        <Tables as HTMLRenderer<TopElem>>::render(&tables),
     ))
 }

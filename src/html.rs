@@ -4,13 +4,16 @@ mod table;
 use figure::FigureElem;
 use crate::data::Tables;
 
-trait HTMLRenderer<T>
+pub trait HTMLRenderer<T>
 {
     fn render(&self) -> String;
 }
 
-pub fn render(tables: &Tables) -> String {
-    format!("
+pub struct TopElem;
+
+impl HTMLRenderer<TopElem> for Tables {
+    fn render(&self) -> String {
+        format!("
 <html>
 <head>
     <title> Attendance Management</title>
@@ -23,5 +26,6 @@ pub fn render(tables: &Tables) -> String {
     {}
 </body>
 </html>
-    ", <Tables as HTMLRenderer<FigureElem>>::render(tables))
+        ", <Tables as HTMLRenderer<FigureElem>>::render(self))
+    }
 }

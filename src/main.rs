@@ -6,6 +6,8 @@ use anyhow;
 use cgi;
 use chrono::Local;
 
+use data::Tables;
+use html::{ HTMLRenderer, TopElem };
 use request::Request;
 
 const JSON_FILE: &'static str = "cgi-bin/data.json";
@@ -35,6 +37,9 @@ fn cgi_main(request: cgi::Request) -> anyhow::Result<cgi::Response> {
     // 3. data.json 書き込み
     data::store(JSON_FILE, &tables)?;
 
-    // 3. レスポンス生成
-    Ok(cgi::html_response(200, html::render(&tables)))
+    // 4. レスポンス生成
+    Ok(cgi::html_response(
+        200,
+        <Tables as HTMLRenderer<TopElem>>::render(&tables)
+    ))
 }

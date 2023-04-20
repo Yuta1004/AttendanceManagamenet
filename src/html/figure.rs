@@ -40,21 +40,6 @@ impl HTMLRenderer<FigureElem> for Table {
             TableStat::Vacant => "pink"
         };
 
-        let rendered_comment = if self.comment.len() > 0 {
-            "
-<h2
-    style=\"
-        position: absolute;
-        right: 0;
-        top: 0;
-    \">
-    💬
-</h1>
-            "
-        } else {
-            ""
-        }.to_string();
-
         format!("
 <button
     type=\"submit\"
@@ -72,10 +57,9 @@ impl HTMLRenderer<FigureElem> for Table {
     <div>
         <h1>{}</h1>
         <p>{}</p>
-        {}
     </div>
 </button>
         ", self.name, self.pos.x, self.pos.y, self.pos.width, self.pos.height,
-           button_color, self.name, self.updated_at, rendered_comment)
+           button_color, self.name, self.updated_at)
     }
 }

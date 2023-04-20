@@ -1,4 +1,4 @@
-use crate::data::{ Tables, Table };
+use crate::data::{ Tables, Table, TableStat };
 
 pub trait HTMLFigureRenderer {
     fn render(&self) -> String;
@@ -32,6 +32,11 @@ impl HTMLFigureRenderer for Tables {
 
 impl HTMLFigureRenderer for Table {
     fn render(&self) -> String {
+        let button_color = match self.state {
+            TableStat::Occupied => "lime",
+            TableStat::Vacant => "pink"
+        };
+
         let rendered_comment = if self.comment.len() > 0 {
             "
 <h2
@@ -58,6 +63,7 @@ impl HTMLFigureRenderer for Table {
         top: calc(90vh * {});
         width: calc(90vw * {});
         height: calc(90vh * {});
+        background-color: {};
     \"
 >
     <div>
@@ -67,7 +73,7 @@ impl HTMLFigureRenderer for Table {
     </div>
 </button>
         ", self.name, self.pos.x, self.pos.y, self.pos.width, self.pos.height,
-           self.name, self.updated_at, rendered_comment)
+           button_color, self.name, self.updated_at, rendered_comment)
     }
 }
 

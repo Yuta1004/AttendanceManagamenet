@@ -1,5 +1,5 @@
 use std::fs::File;
-use std::io::BufReader;
+use std::io::{ BufReader, BufWriter };
 
 use anyhow;
 use serde::{ Serialize, Deserialize };
@@ -48,4 +48,11 @@ pub fn load(fname: &str) -> anyhow::Result<Tables> {
     let reader = BufReader::new(f);
     let data = serde_json::from_reader(reader)?;
     Ok(data)
+}
+
+pub fn store(fname: &str, tables: &Tables) -> anyhow::Result<()> {
+    let f = File::create(fname)?;
+    let writer = BufWriter::new(f);
+    serde_json::ser::to_writer_pretty(writer, tables)?;
+    Ok(())
 }

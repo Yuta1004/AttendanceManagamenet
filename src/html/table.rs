@@ -1,14 +1,14 @@
 use crate::data::{ Tables, Table, TableStat };
 
-pub trait HTMLTableFormatter {
-    fn format(&self) -> String;
+pub trait HTMLTableRenderer {
+    fn render(&self) -> String;
 }
 
-impl HTMLTableFormatter for Tables {
-    fn format(&self) -> String {
-        let formatted_tables = self.tables
+impl HTMLTableRenderer for Tables {
+    fn render(&self) -> String {
+        let rendered_tables = self.tables
             .iter()
-            .map(|table| table.format())
+            .map(|table| table.render())
             .collect::<Vec<String>>()
             .join("\n");
 
@@ -26,12 +26,12 @@ impl HTMLTableFormatter for Tables {
     </tr>
     {}
 </table>
-        ", formatted_tables)
+        ", rendered_tables)
     }
 }
 
-impl HTMLTableFormatter for Table {
-    fn format(&self) -> String {
+impl HTMLTableRenderer for Table {
+    fn render(&self) -> String {
         format!("
 <tr>
     <td>{}</td>
@@ -39,15 +39,22 @@ impl HTMLTableFormatter for Table {
     <td>{}</td>
     <td>{}</td>
 </tr>
-        ", self.name, self.state.format(), self.comment, self.updated_at)
+        ", self.name, self.state.render(), self.comment, self.updated_at)
     }
 }
 
-impl HTMLTableFormatter for TableStat {
-    fn format(&self) -> String {
+impl HTMLTableRenderer for TableStat {
+    fn render(&self) -> String {
         match self {
             TableStat::Occupied => "〇".to_string(),
             TableStat::Vacant => "".to_string(),
         }
     }
+}
+
+pub fn render<T>(elem: &T) -> String
+where
+    T: HTMLTableRenderer
+{
+    elem.render()
 }

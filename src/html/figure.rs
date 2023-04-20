@@ -1,14 +1,14 @@
 use crate::data::{ Tables, Table };
 
-pub trait HTMLFigureFormatter {
-    fn format(&self) -> String;
+pub trait HTMLFigureRenderer {
+    fn render(&self) -> String;
 }
 
-impl HTMLFigureFormatter for Tables {
-    fn format(&self) -> String {
-        let formatted_tables = self.tables
+impl HTMLFigureRenderer for Tables {
+    fn render(&self) -> String {
+        let rendered_tables = self.tables
             .iter()
-            .map(|table| table.format())
+            .map(|table| table.render())
             .collect::<Vec<String>>()
             .join("\n");
 
@@ -23,13 +23,13 @@ impl HTMLFigureFormatter for Tables {
     \">
     {}
 </div>
-        ", formatted_tables)
+        ", rendered_tables)
     }
 }
 
-impl HTMLFigureFormatter for Table {
-    fn format(&self) -> String {
-        let formatted_comment = if self.comment.len() > 0 {
+impl HTMLFigureRenderer for Table {
+    fn render(&self) -> String {
+        let rendered_comment = if self.comment.len() > 0 {
             format!("
 <p
     style=\"
@@ -59,6 +59,13 @@ impl HTMLFigureFormatter for Table {
     </div>
 </button>
         ", self.pos.x, self.pos.y, self.pos.width, self.pos.height,
-           self.name, self.updated_at, formatted_comment)
+           self.name, self.updated_at, rendered_comment)
     }
+}
+
+pub fn render<T>(elem: &T) -> String
+where
+    T: HTMLFigureRenderer
+{
+    elem.render()
 }

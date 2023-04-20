@@ -1,9 +1,9 @@
-use crate::data::{ Tables };
+use crate::data::Tables;
 
 mod figure;
 mod table;
 
-pub fn format(tables: &Tables) -> String {
+pub fn render(tables: &Tables) -> String {
     format!("
 <html>
 <head>
@@ -17,19 +17,5 @@ pub fn format(tables: &Tables) -> String {
     {}
 </body>
 </html>
-    ", gen_figure(tables), gen_table(tables))
-}
-
-fn gen_figure<T>(elem: &T) -> String
-where
-    T: figure::HTMLFigureFormatter
-{
-    elem.format()
-}
-
-fn gen_table<T>(elem: &T) -> String
-where
-    T: table::HTMLTableFormatter
-{
-    elem.format()
+    ", figure::render(tables), table::render(tables))
 }

@@ -13,5 +13,5 @@ fn cgi_main(_: cgi::Request) -> anyhow::Result<cgi::Response> {
     let tables = data::load(JSON_FILE)?;
 
     // 2. レスポンス生成
-    Ok(cgi::html_response(200, html::format(&tables)))
+    Ok(cgi::html_response(200, html::render(&tables)))
 }

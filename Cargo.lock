@@ -25,6 +25,7 @@ dependencies = [
  "cgi",
  "chrono",
  "chrono-tz",
+ "percent-encoding",
  "serde",
  "serde_json",
  "thiserror",
@@ -279,6 +280,12 @@ checksum = "c705f256449c60da65e11ff6626e0c16a0a0b96aaa348de61376b249bc340f41"
 dependencies = [
  "regex",
 ]
+
+[[package]]
+name = "percent-encoding"
+version = "2.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "478c572c3d73181ff3c2539045f6eb99e5491218eae919370993b890cdbdd98e"
 
 [[package]]
 name = "phf"

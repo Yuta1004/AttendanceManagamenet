@@ -8,3 +8,7 @@ $(DIST_BIN): $(SRCS)
 
 run: $(DIST_BIN)
 	python3 -m http.server --cgi $(RUN_OPTS)
+
+dist: $(DIST_BIN)
+	cp -r cgi-bin dist
+	cp schema.json dist/data.json

@@ -11,6 +11,8 @@ $(CGI_BIN): $(SRCS)
 run: $(DIST_BIN)
 	python3 -m http.server --cgi $(RUN_OPTS)
 
-dist: $(DIST_BIN)
-	cp -r cgi-bin dist
+dist:
+	mkdir -p dist
+	cargo build --release
+	cp target/release/attendance_management dist
 	cp schema.json dist/data.json

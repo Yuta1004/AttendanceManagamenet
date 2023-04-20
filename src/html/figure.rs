@@ -13,15 +13,18 @@ impl HTMLFigureRenderer for Tables {
             .join("\n");
 
         format!("
-<div
-    style=\"
-        border: solid;
-        position: relative;
-        width: 90vw;
-        height: 90vh;
-        margin: auto;
-    \">
-    {}
+<div>
+    <form
+        method=\"POST\"
+        style=\"
+            border: solid;
+            position: relative;
+            width: 90vw;
+            height: 90vh;
+            margin: auto;
+        \">
+        {}
+    <form>
 </div>
         ", rendered_tables)
     }
@@ -46,6 +49,9 @@ impl HTMLFigureRenderer for Table {
 
         format!("
 <button
+    type=\"submit\"
+    name=\"state\"
+    value=\"{}\"
     style=\"
         position: absolute;
         left: calc(90vw * {});
@@ -60,7 +66,7 @@ impl HTMLFigureRenderer for Table {
         {}
     </div>
 </button>
-        ", self.pos.x, self.pos.y, self.pos.width, self.pos.height,
+        ", self.name, self.pos.x, self.pos.y, self.pos.width, self.pos.height,
            self.name, self.updated_at, rendered_comment)
     }
 }

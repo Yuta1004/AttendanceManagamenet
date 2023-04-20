@@ -30,8 +30,17 @@ pub struct TablePos {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub enum TableStat {
-    Occupied,   // 出席
+    Occupied,   // 在席
     Vacant,     // 空席
+}
+
+impl TableStat {
+    pub fn inverse(&self) -> TableStat {
+        match self {
+            TableStat::Occupied => TableStat::Vacant,
+            TableStat::Vacant => TableStat::Occupied,
+        }
+    }
 }
 
 pub fn load(fname: &str) -> anyhow::Result<Tables> {

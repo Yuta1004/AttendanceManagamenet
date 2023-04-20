@@ -30,17 +30,19 @@ impl HTMLFigureRenderer for Tables {
 impl HTMLFigureRenderer for Table {
     fn render(&self) -> String {
         let rendered_comment = if self.comment.len() > 0 {
-            format!("
-<p
+            "
+<h2
     style=\"
-        border: dashed 0.5px;
+        position: absolute;
+        right: 0;
+        top: 0;
     \">
-    {}
-</p>
-            ", self.comment)
+    💬
+</h1>
+            "
         } else {
-            "".to_string()
-        };
+            ""
+        }.to_string();
 
         format!("
 <button

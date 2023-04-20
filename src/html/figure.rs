@@ -1,14 +1,13 @@
+use crate::html::HTMLRenderer;
 use crate::data::{ Tables, Table, TableStat };
 
-pub trait HTMLFigureRenderer {
-    fn render(&self) -> String;
-}
+pub(super) struct FigureElem;
 
-impl HTMLFigureRenderer for Tables {
+impl HTMLRenderer<FigureElem> for Tables {
     fn render(&self) -> String {
         let rendered_tables = self.tables
             .iter()
-            .map(|table| table.render())
+            .map(|table| <Table as HTMLRenderer<FigureElem>>::render(table))
             .collect::<Vec<String>>()
             .join("\n");
 
@@ -34,7 +33,7 @@ impl HTMLFigureRenderer for Tables {
     }
 }
 
-impl HTMLFigureRenderer for Table {
+impl HTMLRenderer<FigureElem> for Table {
     fn render(&self) -> String {
         let button_color = match self.state {
             TableStat::Occupied => "lime",
@@ -79,11 +78,4 @@ impl HTMLFigureRenderer for Table {
         ", self.name, self.pos.x, self.pos.y, self.pos.width, self.pos.height,
            button_color, self.name, self.updated_at, rendered_comment)
     }
-}
-
-pub fn render<T>(elem: &T) -> String
-where
-    T: HTMLFigureRenderer
-{
-    elem.render()
 }

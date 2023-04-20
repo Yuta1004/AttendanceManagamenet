@@ -1,14 +1,13 @@
+use crate::html::HTMLRenderer;
 use crate::data::{ Tables, Table, TableStat };
 
-pub trait HTMLTableRenderer {
-    fn render(&self) -> String;
-}
+pub(super) struct TableElem;
 
-impl HTMLTableRenderer for Tables {
+impl HTMLRenderer<TableElem> for Tables {
     fn render(&self) -> String {
         let rendered_tables = self.tables
             .iter()
-            .map(|table| table.render())
+            .map(|table| <Table as HTMLRenderer<TableElem>>::render(table))
             .collect::<Vec<String>>()
             .join("\n");
 
@@ -30,7 +29,7 @@ impl HTMLTableRenderer for Tables {
     }
 }
 
-impl HTMLTableRenderer for Table {
+impl HTMLRenderer<TableElem> for Table {
     fn render(&self) -> String {
         format!("
 <tr>
@@ -43,18 +42,11 @@ impl HTMLTableRenderer for Table {
     }
 }
 
-impl HTMLTableRenderer for TableStat {
+impl HTMLRenderer<TableElem> for TableStat {
     fn render(&self) -> String {
         match self {
             TableStat::Occupied => "〇".to_string(),
             TableStat::Vacant => "".to_string(),
         }
     }
-}
-
-pub fn render<T>(elem: &T) -> String
-where
-    T: HTMLTableRenderer
-{
-    elem.render()
 }

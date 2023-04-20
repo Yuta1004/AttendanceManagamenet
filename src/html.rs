@@ -1,7 +1,13 @@
-use crate::data::Tables;
-
 mod figure;
 mod table;
+
+use figure::FigureElem;
+use crate::data::Tables;
+
+trait HTMLRenderer<T>
+{
+    fn render(&self) -> String;
+}
 
 pub fn render(tables: &Tables) -> String {
     format!("
@@ -17,5 +23,5 @@ pub fn render(tables: &Tables) -> String {
     {}
 </body>
 </html>
-    ", figure::render(tables))
+    ", <Tables as HTMLRenderer<FigureElem>>::render(tables))
 }

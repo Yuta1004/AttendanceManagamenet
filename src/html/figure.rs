@@ -13,19 +13,24 @@ impl HTMLFigureRenderer for Tables {
             .join("\n");
 
         format!("
-<div>
-    <form
-        method=\"POST\"
+<div
+    style=\"
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        margin: auto;
+    \">
+    <form method=\"POST\">{}</form>
+    <p
         style=\"
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            margin: auto;
+            position: absolute;
+            right: 0;
+            bottom: 0;
         \">
-        {}
-    <form>
+        最終更新 : {}
+    </p>
 </div>
-        ", rendered_tables)
+        ", rendered_tables, self.updated_at)
     }
 }
 
